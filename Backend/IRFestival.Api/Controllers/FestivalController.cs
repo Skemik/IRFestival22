@@ -24,7 +24,7 @@ namespace IRFestival.Api.Controllers
         public async Task<ActionResult> GetLineUp()
         {
             var schedule = await _ctx.Schedules.Include(s => s.Festival).Include(s => s.Items)
-                .ThenInclude(s => s.Artist).Include(s => s.Items).ThenInclude(s => s.Stage).ToListAsync();
+                .ThenInclude(s => s.Artist).Include(s => s.Items).ThenInclude(s => s.Stage).FirstOrDefaultAsync();
             return Ok(schedule);
         }
 
