@@ -19,15 +19,15 @@ export class HomeComponent implements OnInit {
   scheduleByDate$: Observable<{date: string, items: ScheduleItem[]}[]>;
 
   constructor(private festivalApiService: FestivalApiService) {
-    this.AppInsights=new ApplicationInsights({config:{
-      connectionString:environment.connectionstringAppInsights,
-      enableAutoRouteTracking:true
-    }});
+    // this.AppInsights=new ApplicationInsights({config:{
+    //   connectionString:environment.connectionstringAppInsights,
+    //   enableAutoRouteTracking:true
+    // }});
    }
 
   ngOnInit(): void {
-    this.AppInsights.loadAppInsights();
-    this.AppInsights.trackPageView();
+    // this.AppInsights.loadAppInsights();
+    // this.AppInsights.trackPageView();
     this.artists$ = this.festivalApiService
       .getArtists()
       .pipe(shareReplay());
