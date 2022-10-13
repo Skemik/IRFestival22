@@ -1,9 +1,11 @@
 ﻿using System.Net;
-
+using IRFestival.Api.Contexts;
 using Microsoft.AspNetCore.Mvc;
 
 using IRFestival.Api.Data;
 using IRFestival.Api.Domain;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace IRFestival.Api.Controllers
 {
@@ -11,34 +13,44 @@ namespace IRFestival.Api.Controllers
     [ApiController]
     public class FestivalController : ControllerBase
     {
+        private FestivalDbContext _ctx { get; set; }
+
+        public FestivalController(FestivalDbContext ctx)
+        {
+            _ctx = ctx;
+        }
         [HttpGet("LineUp")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(Schedule))]
-        public ActionResult GetLineUp()
+        public async Task<ActionResult> GetLineUp()
         {
-            return Ok(FestivalDataSource.Current.LineUp);
+            var schedule = await _ctx.Schedules.Include(s => s.Festival).Include(s => s.Items)
+                .ThenInclude(s => s.Artist).Include(s => s.Items).ThenInclude(s => s.Stage).ToListAsync();
+            return Ok(schedule);
         }
 
         [HttpGet("Artists")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(IEnumerable<Artist>))]
-        public ActionResult GetArtists()
+        public async Task<ActionResult> GetArtists()
         {
-            return Ok(FestivalDataSource.Current.Artists);
+            var artists = await _ctx.Artists.ToListAsync();
+            return Ok(artists);
         }
 
         [HttpGet("Stages")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(IEnumerable<Stage>))]
-        public ActionResult GetStages()
+        public async Task<ActionResult> GetStages()
         {
-            return Ok(FestivalDataSource.Current.Stages);
+            var stages = await _ctx.Stages.ToListAsync();
+            return Ok(stages);
         }
 
         [HttpPost("Favorite")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ScheduleItem))]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public ActionResult SetAsFavorite(int id)
+        public async Task<ActionResult> SetAsFavorite(int id)
         {
-            var schedule = FestivalDataSource.Current.LineUp.Items
-                .FirstOrDefault(si => si.Id == id);
+            var schedule = await _ctx.Schedules.Select(x => x.Items.FirstOrDefault(x => x.Id == id)).FirstAsync();
+
             if (schedule != null)
             {
                 schedule.IsFavorite = !schedule.IsFavorite;
