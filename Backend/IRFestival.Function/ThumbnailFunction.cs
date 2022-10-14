@@ -22,7 +22,7 @@ namespace IRFestival.Function
             using Image<Rgba32> input = Image.Load<Rgba32>(image, out IImageFormat format);
             input.Mutate(i =>
             {
-                i.Resize(340, 0);
+                i.Resize(340, 0); 
                 int height = i.GetCurrentSize().Height;
                 i.Crop(new Rectangle(0, 0, 340, height < 226 ? height : 226));
             });
