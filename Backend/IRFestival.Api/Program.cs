@@ -51,7 +51,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-// THIS IS NOT A SECURE CORS POLICY, DO NOT USE IN PRODUCTION
+// THIS IS NOT A SECURE CORS POLICY, DO NOT USE IN PRODUCTION 
 app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseAuthorization();
