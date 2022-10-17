@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,13 +12,15 @@ export class PicturesApiService {
   constructor(private httpClient: HttpClient) { }
 
   getAllUrls(): Observable<string[]> {
-    return this.httpClient.get<string[]>(`${this.baseUrl}`);
+    const headers = new HttpHeaders().set("Ocp-Apim-Subscription-Key", "87af1e6f5c8649c59431acd66a26949b");
+    return this.httpClient.get<string[]>(`${this.baseUrl}`, {'headers':headers});
   }
 
   upload(file: File): Observable<never> {
+    const headers = new HttpHeaders().set("Ocp-Apim-Subscription-Key", "87af1e6f5c8649c59431acd66a26949b");
     const data = new FormData();
     data.set('file', file);
 
-    return this.httpClient.post<never>(`${this.baseUrl}`, data);
+    return this.httpClient.post<never>(`${this.baseUrl}/upload`, data, {'headers':headers});
   }
 }

@@ -6,6 +6,7 @@ using IRFestival.Api.Common;
 using IRFestival.Api.Contexts;
 using IRFestival.Api.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,7 +45,7 @@ builder.Services.AddSingleton(p => new BlobServiceClient(new Uri(blobUri), stora
 builder.Services.AddSingleton(p => storageSharedKeyCredential);
 builder.Services.AddSingleton<BlobUtility>();
 builder.Services.Configure<BlobSettingsOptions>(builder.Configuration.GetSection("Storage"));
-
+builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration, "AzureAd");
 var app = builder.Build();
 
 app.UseSwagger();
@@ -63,6 +64,7 @@ app.UseRouting();
 // THIS IS NOT A SECURE CORS POLICY, DO NOT USE IN PRODUCTION 
 app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
