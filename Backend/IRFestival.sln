@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IRFestival.Api", "IRFestival.Api\IRFestival.Api.csproj", "{D7D1177D-6A32-4C8D-8437-70A503AC5B7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRFestival.Function", "IRFestival.Function\IRFestival.Function.csproj", "{B760D87E-6F54-448A-9F0C-E4BBAE8B893D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IRFestival.Function", "IRFestival.Function\IRFestival.Function.csproj", "{B760D87E-6F54-448A-9F0C-E4BBAE8B893D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRFestival.MailerConsole", "IRFestival.MailerConsole\IRFestival.MailerConsole.csproj", "{30EC18E4-2B98-4891-B62A-294C75BA0995}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B760D87E-6F54-448A-9F0C-E4BBAE8B893D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B760D87E-6F54-448A-9F0C-E4BBAE8B893D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B760D87E-6F54-448A-9F0C-E4BBAE8B893D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30EC18E4-2B98-4891-B62A-294C75BA0995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30EC18E4-2B98-4891-B62A-294C75BA0995}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30EC18E4-2B98-4891-B62A-294C75BA0995}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30EC18E4-2B98-4891-B62A-294C75BA0995}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
